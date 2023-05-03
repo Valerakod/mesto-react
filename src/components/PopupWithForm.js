@@ -5,21 +5,15 @@ function PopupWithForm({ title, name, children, isOpen, onClose, buttonText }) {
     isOpen ? "popup_opened" : " "
   }`;
 
-
   return (
-    
     <div className={className} onClick={onClose}>
-      <div className="popup__container" onClick={(e => e.stopPropagation())}>
-        <form
-          className="popup__form"
-          method="post"
-          title={title}
-          name={name}
-          children={children}
-          buttonText={buttonText}
-        >
+      <div className="popup__container" onClick={(e) => e.stopPropagation()}>
+        <form className="popup__form" name={name}>
           <h2 className="popup__title">{title}</h2>
           {children}
+          <button className="popup__save-button " type="submit">
+            {buttonText}
+          </button>
         </form>
         <button
           className="popup__close-button popup__close-button_edit"
@@ -27,11 +21,8 @@ function PopupWithForm({ title, name, children, isOpen, onClose, buttonText }) {
           aria-label="Закрыть"
           onClick={onClose}
         ></button>
-        <button className="popup__save-button " type="submit" onClick={onClose}>{buttonText}</button>
-        
       </div>
     </div>
-   
   );
 }
 
