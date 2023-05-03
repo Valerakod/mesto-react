@@ -27,7 +27,7 @@ function App() {
     setSelectedCard({name: "", link: ""});
   }
   function handleCardClick(card) {
-    setSelectedCard({ name: card.alt, link: card.src })
+    setSelectedCard(card)
 }
   
   return (
