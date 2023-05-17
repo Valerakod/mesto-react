@@ -20,24 +20,7 @@ class Api {
     }).then(this.returnResultStatus);
   }
 
-  setUserInfo(data) {
-    return fetch(this._baseUrl + "users/me", {
-      method: "PATCH",
-      headers: this.headers,
-      body: JSON.stringify({
-        name: data.name,
-        about: data.about,
-      }),
-    }).then(this.returnResultStatus);
-  }
-
-  getInitialCards() {
-    return fetch(this._baseUrl + "/cards", { headers: this._headers }).then(
-      this.returnResultStatus
-    );
-  }
-
-  editProfileInfo(name, about) {
+  setUserInfo(name, about) {
     return fetch(this._baseUrl + "/users/me", {
       method: "PATCH",
       headers: this._headers,
@@ -46,6 +29,12 @@ class Api {
         about: about,
       }),
     }).then(this.returnResultStatus);
+  }
+
+  getInitialCards() {
+    return fetch(this._baseUrl + "/cards", { headers: this._headers }).then(
+      this.returnResultStatus
+    );
   }
 
   addCard({ title, link }) {

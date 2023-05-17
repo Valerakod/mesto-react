@@ -40,12 +40,24 @@ function App(isOpen, onClose) {
     setSelectedCard(card);
   }
 
+// получаем массив карточек
   useEffect(() => {
     api
       .getInitialCards()
       .then((res) => setCards(res))
       .catch((err) => console.log(err));
   }, []);
+
+// получаем информацию о пользователе
+useEffect(() => {
+  api.getUserInfo()
+      .then((userInfo) => {
+          setCurrentUser(userInfo);
+      })
+      .catch((err) => {
+          console.log(`Ошибка! ${err}`);
+      });
+}, []);
 
   //смена информации о пользователе
   function handleUpdateUser(data) {
@@ -113,6 +125,8 @@ function App(isOpen, onClose) {
         console.log(`Ошибка! ${err}`);
       });
   }
+
+
   //закрытие попап по Esc
   React.useEffect(() => {
     if (!isOpen) return;

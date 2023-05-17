@@ -5,6 +5,7 @@ function PopupWithForm({ title, name, children, isOpen, onClose, buttonText }) {
     isOpen ? "popup_opened" : " "
   }`;
 
+
   return (
     <div className={className} onClick={onClose}>
       <div className="popup__container" onClick={(e) => e.stopPropagation()}>
