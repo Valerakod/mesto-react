@@ -20,6 +20,17 @@ class Api {
     }).then(this.returnResultStatus);
   }
 
+  setUserInfo(data) {
+    return fetch(this._baseUrl + "users/me", {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about,
+      }),
+    }).then(this.returnResultStatus);
+  }
+
   getInitialCards() {
     return fetch(this._baseUrl + "/cards", { headers: this._headers }).then(
       this.returnResultStatus
@@ -56,16 +67,9 @@ class Api {
     }).then(this.returnResultStatus);
   }
 
-  addLike(cardId) {
-    return fetch(this._baseUrl + `/cards/likes/${cardId}`, {
-      method: "PUT",
-      headers: this._headers,
-    }).then(this.returnResultStatus);
-  }
-
-  deleteLike(cardId) {
-    return fetch(this._baseUrl + `/cards/likes/${cardId}`, {
-      method: "DELETE",
+  changeLikeCardStatus(id, isLiked) {
+    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+      method: isLiked ? "PUT" : "DELETE",
       headers: this._headers,
     }).then(this.returnResultStatus);
   }
