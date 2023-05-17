@@ -50,7 +50,7 @@ function EditProfilePopup({ props, isOpen, onClose }) {
             placeholder="Имя"
             type="text"
             onChange={handleNameChange}
-            value={name || ""}
+            value={name}
             required
             id="popup-name"
             minLength="2"
@@ -68,7 +68,7 @@ function EditProfilePopup({ props, isOpen, onClose }) {
             placeholder="Профессиональная деятельность"
             type="text"
             onChange={handleDescriptionChange}
-            value={description || ""}
+            value={description}
             required
             id="popup-job"
             minLength="2"
