@@ -10,7 +10,7 @@ import AddPlacePopup from "./AddPlacePopup.js";
 import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-function App(isOpen, onClose) {
+function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -127,33 +127,7 @@ function App(isOpen, onClose) {
       });
   }
 
-  //закрытие попап по Esc
-  React.useEffect(() => {
-    if (!isOpen) return;
-    const handleEscapeClose = (event) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
-    };
-    document.addEventListener("keydown", handleEscapeClose);
-    return () => {
-      document.removeEventListener("keydown", handleEscapeClose);
-    };
-  }, [isOpen, onClose]);
-
-  //закрытие попап по оверлею
-  React.useEffect(() => {
-    if (!isOpen) return;
-    const handleOverlayClose = (event) => {
-      if (event.target === event.currentTarget && isOpen) {
-        onClose();
-      }
-    };
-    document.addEventListener("click", handleOverlayClose);
-    return () => {
-      document.removeEventListener("click", handleOverlayClose);
-    };
-  }, [isOpen, onClose]);
+  
 
   return (
     <div className="App">

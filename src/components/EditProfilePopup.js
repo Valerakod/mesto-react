@@ -17,20 +17,22 @@ function EditProfilePopup({ onUpdateUser, isOpen, onClose }) {
 
   // После загрузки текущего пользователя из API его данные будут использованы в управляемых компонентах
   useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
-  }, [currentUser]);
+    if (!isOpen) {
+      setName(currentUser.name);
+      setDescription(currentUser.about);
+    }
+  }, [currentUser, isOpen]);
 
   function handleSubmit(e) {
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
-  
+
     // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({
       name,
       about: description,
-  });
-  } 
+    });
+  }
 
   return (
     <PopupWithForm

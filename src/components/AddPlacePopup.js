@@ -1,10 +1,17 @@
-import React from 'react';
-import { useState } from 'react';
+import React from "react";
+import { useState, useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup( {onAddCard, isOpen, onClose} ) {
+function AddPlacePopup({ onAddCard, isOpen, onClose }) {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
+
+  useEffect(() => {
+    if (!isOpen) {
+      setTitle("");
+      setLink("");
+    }
+  }, [isOpen]);
 
   function handleAddPlaceSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
@@ -14,8 +21,6 @@ function AddPlacePopup( {onAddCard, isOpen, onClose} ) {
       name: title,
       link: link,
     });
-    setTitle("");
-    setLink("");
   }
 
   function handleAddTitle(evt) {
@@ -25,7 +30,7 @@ function AddPlacePopup( {onAddCard, isOpen, onClose} ) {
   function handleAddLink(evt) {
     setLink(evt.target.value);
   }
-  
+
   return (
     <PopupWithForm
       className="popup__form popup__form_add"
