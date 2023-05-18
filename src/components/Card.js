@@ -7,6 +7,10 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   // Определяем, являемся ли мы владельцем текущей карточки
   const isOwn = card.owner._id === currentUser._id;
 
+  const cardDeleteButtonClassName = `element__delete-icon ${
+    isOwn ? "element__delete-icon_visible" : ''
+}`;
+
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
   const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
@@ -43,14 +47,14 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
         ></button>
         <p className="element__heart-count">{card?.likes.length}</p>
       </div>
-      {isOwn && (
+     
         <button
-          className="element__delete-icon"
+          className={cardDeleteButtonClassName}
           type="button"
           aria-label="Удалить"
           onClick={handleDeleteClick}
         ></button>
-      )}
+      
     </article>
   );
 }

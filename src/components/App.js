@@ -40,7 +40,7 @@ function App(isOpen, onClose) {
     setSelectedCard(card);
   }
 
-// получаем массив карточек
+  // получаем массив карточек
   useEffect(() => {
     api
       .getInitialCards()
@@ -48,16 +48,17 @@ function App(isOpen, onClose) {
       .catch((err) => console.log(err));
   }, []);
 
-// получаем информацию о пользователе
-useEffect(() => {
-  api.getUserInfo()
+  // получаем информацию о пользователе
+  useEffect(() => {
+    api
+      .getUserInfo()
       .then((userInfo) => {
-          setCurrentUser(userInfo);
+        setCurrentUser(userInfo);
       })
       .catch((err) => {
-          console.log(`Ошибка! ${err}`);
+        console.log(`Ошибка! ${err}`);
       });
-}, []);
+  }, []);
 
   //смена информации о пользователе
   function handleUpdateUser(data) {
@@ -73,9 +74,9 @@ useEffect(() => {
   }
 
   //смена аватара
-  function handleUpdateAvatar(data) {
+  function handleUpdateAvatar(avatar) {
     api
-      .setAvatar(data)
+      .setAvatar(avatar)
       .then((userAvatar) => {
         setCurrentUser(userAvatar);
         closeAllPopups();
@@ -103,9 +104,9 @@ useEffect(() => {
       });
   }
   //добавление карточек
-  function handleAddCard(element) {
+  function handleAddCard({ name, link }) {
     api
-      .addCard(element)
+      .addCard({ name, link })
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
@@ -125,7 +126,6 @@ useEffect(() => {
         console.log(`Ошибка! ${err}`);
       });
   }
-
 
   //закрытие попап по Esc
   React.useEffect(() => {
@@ -180,7 +180,7 @@ useEffect(() => {
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
-            onUpdateUser={handleAddCard}
+            onAddCard={handleAddCard}
           />
 
           <EditAvatarPopup

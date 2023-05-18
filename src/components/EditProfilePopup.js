@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import PopupWithForm from "./PopupWithForm";
 
-function EditProfilePopup({ props, isOpen, onClose }) {
+function EditProfilePopup({ onUpdateUser, isOpen, onClose }) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -26,10 +26,10 @@ function EditProfilePopup({ props, isOpen, onClose }) {
     e.preventDefault();
   
     // Передаём значения управляемых компонентов во внешний обработчик
-    props.onUpdateUser({
+    onUpdateUser({
       name,
       about: description,
-    });
+  });
   } 
 
   return (
@@ -50,7 +50,8 @@ function EditProfilePopup({ props, isOpen, onClose }) {
             placeholder="Имя"
             type="text"
             onChange={handleNameChange}
-            value={name}
+            value={name || ""}
+            name="name"
             required
             id="popup-name"
             minLength="2"
@@ -68,7 +69,8 @@ function EditProfilePopup({ props, isOpen, onClose }) {
             placeholder="Профессиональная деятельность"
             type="text"
             onChange={handleDescriptionChange}
-            value={description}
+            value={description || ""}
+            name="about"
             required
             id="popup-job"
             minLength="2"

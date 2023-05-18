@@ -20,13 +20,13 @@ class Api {
     }).then(this.returnResultStatus);
   }
 
-  setUserInfo(name, about) {
+  setUserInfo(data) {
     return fetch(this._baseUrl + "/users/me", {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: name,
-        about: about,
+        name: data.name,
+        about: data.about,
       }),
     }).then(this.returnResultStatus);
   }
@@ -37,12 +37,12 @@ class Api {
     );
   }
 
-  addCard({ title, link }) {
+  addCard({ name, link }) {
     return fetch(this._baseUrl + "/cards", {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        name: title,
+        name: name,
         link: link,
       }),
     }).then(this.returnResultStatus);
@@ -63,12 +63,12 @@ class Api {
     }).then(this.returnResultStatus);
   }
 
-  setAvatar({ avatar }) {
+  setAvatar(data) {
     return fetch(this._baseUrl + "/users/me/avatar", {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: avatar,
+        avatar: data.avatar,
       }),
     }).then(this.returnResultStatus);
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup({ card, isOpen, onClose }) {
+function AddPlacePopup( {onAddCard, isOpen, onClose} ) {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
 
@@ -10,7 +10,7 @@ function AddPlacePopup({ card, isOpen, onClose }) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
-    card.onAddCard({
+    onAddCard({
       name: title,
       link: link,
     });
